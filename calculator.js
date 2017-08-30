@@ -20,57 +20,61 @@ function Calculator() {
 
     //Создает DOM калькулятора
     function buildCalendar() {
-        var table = $("<table>").addClass("calc");
-
-        for (var i = 0; i < 6; i++) {
-            var tr = $("<tr>");
-            table.append(tr);
-        }
+        var calc = $("<div>").addClass("calc");
 
         //вспомагательная функция, создает кноку, сокращяет код
         function makeButton(text, className) {
             return $("<button>").addClass(className).html(text);
         }
 
+        function makeCell() {
+            return $("<div>").addClass("calc_cell");
+        }
+
         //Дисплей
         var display = $("<textarea>").addClass("calc_display").attr("rows", "1").attr("disabled", "true").text("0");
-        table.find("tr:eq(0)").append($("<td colspan='4'>").append(display));
+        calc.append(display);
 
         //Первый ряд кнопок
-        var row = table.find("tr:eq(1)");
-        row.append($("<td colspan='2'>").append(makeButton("C", "calc_clear").css("width", "100%")));
-        row.append($("<td>").append(makeButton("&plusmn", "calc_sign")));
-        row.append($("<td>").append(makeButton("&#x232B;", "calc_backspace")));
+        var row = $("<div>").addClass("calc_row");
+        row.append(makeCell().addClass("calc_cell-2").append(makeButton("C", "calc_clear")));
+        row.append(makeCell().append(makeButton("&plusmn", "calc_sign")));
+        row.append(makeCell().append(makeButton("&#x232B;", "calc_backspace")));
+        calc.append(row);
 
         //Второй ряд кнопок
-        row = table.find("tr:eq(2)");
-        row.append($("<td>").append(makeButton(7, "calc_numeric")));
-        row.append($("<td>").append(makeButton(8, "calc_numeric")));
-        row.append($("<td>").append(makeButton(9, "calc_numeric")));
-        row.append($("<td>").append(makeButton("&divide;", "calc_operation").val("/")));
+        row = $("<div>").addClass("calc_row");
+        row.append(makeCell().append(makeButton(7, "calc_numeric")));
+        row.append(makeCell().append(makeButton(8, "calc_numeric")));
+        row.append(makeCell().append(makeButton(9, "calc_numeric")));
+        row.append(makeCell().append(makeButton("&divide;", "calc_operation").val("/")));
+        calc.append(row);
 
         //Третий ряд кнопок
-        row = table.find("tr:eq(3)");
-        row.append($("<td>").append(makeButton(4, "calc_numeric")));
-        row.append($("<td>").append(makeButton(5, "calc_numeric")));
-        row.append($("<td>").append(makeButton(6, "calc_numeric")));
-        row.append($("<td>").append(makeButton("&#10005;", "calc_operation").val("*")));
+        row = $("<div>").addClass("calc_row");
+        row.append(makeCell().append(makeButton(4, "calc_numeric")));
+        row.append(makeCell().append(makeButton(5, "calc_numeric")));
+        row.append(makeCell().append(makeButton(6, "calc_numeric")));
+        row.append(makeCell().append(makeButton("&#10005;", "calc_operation").val("*")));
+        calc.append(row);
 
         //Четвертый ряд кнопок
-        row = table.find("tr:eq(4)");
-        row.append($("<td>").append(makeButton(1, "calc_numeric")));
-        row.append($("<td>").append(makeButton(2, "calc_numeric")));
-        row.append($("<td>").append(makeButton(3, "calc_numeric")));
-        row.append($("<td>").append(makeButton("&#8722;", "calc_operation").val("-")));
+        row = $("<div>").addClass("calc_row");
+        row.append(makeCell().append(makeButton(1, "calc_numeric")));
+        row.append(makeCell().append(makeButton(2, "calc_numeric")));
+        row.append(makeCell().append(makeButton(3, "calc_numeric")));
+        row.append(makeCell().append(makeButton("&#8722;", "calc_operation").val("-")));
+        calc.append(row);
 
         //Пятый ряд кнопок
-        row = table.find("tr:eq(5)");
-        row.append($("<td colspan='2'>").append(makeButton(0, "calc_numeric").css("width", "100%")));
-        row.append($("<td>").append(makeButton("=", "calc_equals")));
-        row.append($("<td>").append(makeButton("+", "calc_operation").val("+")));
+        row = $("<div>").addClass("calc_row");
+        row.append(makeCell().addClass("calc_cell-2").append(makeButton(0, "calc_numeric")));
+        row.append(makeCell().append(makeButton("=", "calc_equals")));
+        row.append(makeCell().append(makeButton("+", "calc_operation").val("+")));
+        calc.append(row);
 
         //обработка событий калькулятора
-        table.click(function (event) {
+        calc.click(function (event) {
             var className = event.target.className; //будем различать тип элемента по классу
             switch (className) {
                 case "calc_clear": //нажата кнопка С
@@ -94,7 +98,7 @@ function Calculator() {
             }
         });
 
-        rootElement = table;
+        rootElement = calc;
         displayElement = display;
     }
 
