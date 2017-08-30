@@ -32,11 +32,12 @@ function Calculator() {
         }
 
         //Дисплей
+        var row = $("<div>").addClass("calc_row");
         var display = $("<textarea>").addClass("calc_display").attr("rows", "1").attr("disabled", "true").text("0");
-        calc.append(display);
+        calc.append(row.append(display));
 
         //Первый ряд кнопок
-        var row = $("<div>").addClass("calc_row");
+        row = $("<div>").addClass("calc_row");
         row.append(makeCell().addClass("calc_cell-2").append(makeButton("C", "calc_clear")));
         row.append(makeCell().append(makeButton("&plusmn", "calc_sign")));
         row.append(makeCell().append(makeButton("&#x232B;", "calc_backspace")));
