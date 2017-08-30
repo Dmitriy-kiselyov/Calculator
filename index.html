@@ -1,15 +1,49 @@
 <!DOCTYPE html>
+<html>
 <head>
     <meta charset="UTF-8">
     <title>Calculator</title>
+    <link rel="stylesheet" href="style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script src="Calculator.js"></script>
+    <script src="calculator.js"></script>
     <link rel="stylesheet" href="calculator.css">
 </head>
 <body>
+
+<div class="content">
+    <div class="header">Калькулятор</div>
+    <div class="settings">
+        <div class="settings_block">
+            <label for="size" class="label">Размер</label>
+            <select class="select" id="size" onchange="changeSize()">
+                <option value="25">Малютка</option>
+                <option value="50">Небольшой</option>
+                <option selected value="75">Средний</option>
+                <option value="100">Большой</option>
+                <option value="125">Огромный</option>
+            </select>
+        </div>
+    </div>
+    <div class="game-wrapper" id="game-wrapper"></div>
+</div>
+
 <script>
-    var calc = new Calculator();
-    $("body").append(calc.getElement());
+    createCalculator();
+
+    function changeSize() {
+        var size = $("#size").find(":selected").val() + "px";
+        $("#game").css("font-size", size);
+    }
+
+    function createCalculator() {
+        var calc = new Calculator().getElement();
+        calc.attr("id", "game");
+
+        $("#game-wrapper").append(calc);
+        changeSize();
+    }
+
+
 </script>
 </body>
 </html>
