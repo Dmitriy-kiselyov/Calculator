@@ -1,16 +1,16 @@
 # Calculator
-Самый обыкновенный javascript-калькулятор. Тут и добавить, собственно, нечего.
+Regular calculator widget.
 
 ![Imgur](https://i.imgur.com/Z2eqdf8.png)
 
-Я его написал, так как прочитал про единицу измерения __em__ и мне стало интересно
-попрактиковать ее применение на реальной задаче.
-Размер калькулятора меняется автоматически, так как все единицы указаны в __em__.
+Widget uses _em_ unit for sizing, so to perform scaling you can use
+pure _css_, changing `font-size` of html-element:
 
-Преимущество такого подхода в том, что масштабировать калькулятор можно всего
-одной командой в _html_, выставив нужный стиль
-`style = "font-size = _ px"`.
-Таким образом, человеку даже не нужно использовать _javascript_.
+```html
+<div id="game" style="font-size: 20px"></div>
+```
 
-Все остальные виджеты (__календарь__ и __сапёр__) используют этот же подход,
-принимая за единицу измерения (__1em__) строителный блок (ячейку, кнопку и т.д.).
+_1em_ is equivalent to calculator's button size. So command
+`style="font-size: 20px"` will lead to all buttons with size of 20px.
+
+You can test widget by this [link](https://dmitriy-kiselyov.github.io/Calculator/).
